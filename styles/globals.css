@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#141414]
+    @apply bg-[#141414] text-gray-100
   }
 
 }
@@ -14,5 +14,8 @@
 @layer components {
   .navLink {
     @apply capitalize font-light text-[#e5e5e5] hover:text-[#b3b3b3] transition duration-500;
+  }
+  .btnBanner {
+    @apply capitalize text-sm font-semibold flex items-center gap-x-2  px-5 py-1.5 md:py-2.5 md:px-8 md:text-xl rounded  hover:opacity-75 transition 
   }
 }

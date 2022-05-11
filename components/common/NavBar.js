@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BeakerIcon, BellIcon, SearchIcon } from "@heroicons/react/solid";
-import { useState,useEffect } from "react";
+import { HiSearch, HiBell } from "react-icons/hi";
+
+import { useState, useEffect } from "react";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +22,11 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="px-5 z-50	fixed top-0 left-0 right-0">
+    <nav
+      className={`px-5 z-50	fixed top-0 left-0 right-0 ${
+        isScrolled && "bg-[#141414]"
+      }`}
+    >
       <div className="flex justify-between">
         <div className="flex items-center space-x-8 ">
           <div>
@@ -51,11 +56,11 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <SearchIcon className="hidden md:inline-block navLink h-6 w-6" />
+          <HiSearch className="hidden md:inline-block navLink h-6 w-6" />
           <Link href="/">
             <a className="hidden navLink lg:inline-block">Kids</a>
           </Link>
-          <BellIcon className="navLink h-6 w-6" />
+          <HiBell className="navLink h-6 w-6" />
           <Link href="/">
             <a href="">
               <Image
