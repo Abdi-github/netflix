@@ -33,11 +33,14 @@ const VideoLists = ({ videos, category }) => {
         )}
 
         <div
-          className="flex relative items-center md:p-2 gap-x-1 md:gap-x-3 overflow-x-scroll scrollbar-hide"
+          className="flex relative items-center md:p-2 gap-x-2 md:gap-x-3 overflow-x-scroll scrollbar-hide"
           ref={rowRef}
         >
           {videos.map((video) => (
-            <div key={video.id}>
+            <div
+              key={video.id}
+              className="hover:scale-105 md:hover-125 hover:z-50"
+            >
               <VideoCard
                 imgSrc={`${IMAGE_BASE_URL}/w500${
                   video?.backdrop_path || video?.poster_path
