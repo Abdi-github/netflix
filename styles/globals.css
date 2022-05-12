@@ -4,7 +4,8 @@
 
 @layer base {
   body {
-    @apply bg-[#141414] text-gray-100
+    @apply bg-[#141414] text-gray-100 !scrollbar-thin !scrollbar-thumb-red-500 !scrollbar-track-transparent
+    
   }
 
 }
@@ -17,5 +18,8 @@
   }
   .btnBanner {
     @apply capitalize text-sm font-semibold flex items-center gap-x-2  px-5 py-1.5 md:py-2.5 md:px-8 md:text-xl rounded  hover:opacity-75 transition 
+  }
+  .scrollIcon{
+    @apply text-white z-40 h-9 w-9 cursor-pointer absolute top-[50px] opacity-0 transition hover:scale-125 group-hover:opacity-100
   }
 }

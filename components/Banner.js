@@ -15,7 +15,9 @@ const Banner = ({ videos }) => {
     <div className="flex h-[60vh]  md:h-[90vh] bg-gradient-to-b from-gray-900/50 to-gray-500/10">
       <div className="absolute right-0 left-0 top-0  w-screen  h-[60vh]  md:h-[90vh] -z-10 ">
         <Image
-          src={`${IMAGE_BASE_URL}${video?.backdrop_path || video?.poster_path}`}
+          src={`${IMAGE_BASE_URL}/original${
+            video?.backdrop_path || video?.poster_path
+          }`}
           alt={video?.original_title}
           layout="fill"
           objectFit="cover"
