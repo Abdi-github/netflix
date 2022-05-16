@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#141414] text-gray-100 !scrollbar-thin !scrollbar-thumb-red-500 !scrollbar-track-transparent
+    @apply bg-black text-gray-100 !scrollbar-thin !scrollbar-thumb-red-500 !scrollbar-track-transparent
     
   }
 

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Banner from "../components/Banner";
 import NavBar from "../components/common/NavBar";
 import VideoLists from "../components/common/VideoLists";
+import Modal from "../components/Modal";
+import { useAuth } from "../context/AuthContextProvider";
 import {
   getActionMovies,
   getComedyMovies,
@@ -46,6 +48,8 @@ export default function Home({
   horrors,
   documentaries,
 }) {
+  const { user } = useAuth();
+  console.log("User____________", user);
   return (
     <>
       <Head>
@@ -60,6 +64,7 @@ export default function Home({
       <VideoLists videos={comedies} category="Comedy" />
       <VideoLists videos={horrors} category="Scary" />
       <VideoLists videos={documentaries} category="Documentary" />
+      <Modal />
     </>
   );
 }

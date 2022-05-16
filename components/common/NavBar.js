@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HiSearch, HiBell } from "react-icons/hi";
 
 import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContextProvider";
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,6 +21,8 @@ const NavBar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const { signout } = useAuth();
 
   return (
     <nav
@@ -69,6 +72,7 @@ const NavBar = () => {
                 height={25}
                 alt="account-logo"
                 className="rounded "
+                onClick={signout}
               />
             </a>
           </Link>
