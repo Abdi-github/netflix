@@ -42,6 +42,7 @@ const VideoLists = ({ videos, category }) => {
               className="hover:scale-105 md:hover-125 hover:z-50"
             >
               <VideoCard
+                video={video}
                 imgSrc={`${IMAGE_BASE_URL}/w500${
                   video?.backdrop_path || video?.poster_path
                 }`}
@@ -51,7 +52,7 @@ const VideoLists = ({ videos, category }) => {
           ))}
         </div>
         <HiChevronRight
-          className="scrollIcon right-2"
+          className="scrollIcon right-2 z-50"
           onClick={() => handleClick("right")}
         />
       </div>

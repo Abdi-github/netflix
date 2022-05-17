@@ -24,17 +24,17 @@ export const getServerSideProps = async (ctx) => {
   const comedies = await getComedyMovies();
   const horrors = await getHorrorMovies();
   const documentaries = await getDocumentaries();
-  console.log("TRENDING VIDEOS=====================>>", actions.results);
+  // console.log("TRENDING VIDEOS=====================>>", actions);
 
   return {
     props: {
-      trending: trending.results,
-      netflixOriginals: netflixOriginals.results,
-      actions: actions.results,
-      horrors: horrors.results,
-      comedies: comedies.results,
-      romances: romances.results,
-      documentaries: documentaries.results,
+      trending: trending,
+      netflixOriginals: netflixOriginals,
+      actions: actions,
+      horrors: horrors,
+      comedies: comedies,
+      romances: romances,
+      documentaries: documentaries,
     },
   };
 };

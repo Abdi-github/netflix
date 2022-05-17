@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);
+    // localStorage.clear();
   }, []);
 
   if (!showChild) {

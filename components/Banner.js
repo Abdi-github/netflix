@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaPlay } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi";
+import { StoreContext } from "../context/StoreContext";
 
 import { IMAGE_BASE_URL } from "../helpers/global-constants";
 
@@ -10,6 +11,42 @@ const Banner = ({ videos }) => {
   useEffect(() => {
     setVideo(videos[Math.floor(Math.random() * videos.length)]);
   }, [videos]);
+
+  const [showModal, setShowModal] = useState(false);
+  const { state, dispatch } = useContext(StoreContext);
+
+  // console.log("state=======", state);
+
+  const openVideo = () => {
+    setShowModal(true);
+
+    dispatch({
+      type: "SET_MODAL_MODE",
+      payload: { modalMode: true },
+    });
+    dispatch({
+      type: "SET_VIDEO",
+      // payload: {
+      //   video: video,
+      // },
+      payload: {
+        video: { id: video.id, title: video.original_title, type: "movie" },
+      },
+    });
+
+    localStorage.setItem("modalMode", true);
+    localStorage.setItem("video", JSON.stringify(video));
+  };
+
+  // const closeModal = () => {
+  //   setShowModal(false);
+  //   localStorage.setItem("modalMode", false);
+
+  //   dispatch({
+  //     type: "SET_MODAL_MODE",
+  //     payload: { modalMode: false },
+  //   });
+  // };
 
   return (
     <div className="flex h-[60vh]  md:h-[90vh] bg-gradient-to-b from-gray-900/50 to-gray-500/10">
@@ -23,7 +60,6 @@ const Banner = ({ videos }) => {
           objectFit="cover"
         />
       </div>
-
       <div className="py-24 md:self-center px-2 md:px-4 lg:px-7 space-y-2  md:space-y-3">
         <h1 className="text-2xl font-bold md:text-4xl lg:text-6xl">
           {video?.original_title || video?.title}
@@ -32,7 +68,10 @@ const Banner = ({ videos }) => {
           {video?.overview}
         </p>
         <div className="flex space-x-3">
-          <button className="btnBanner bg-white text-black  ">
+          <button
+            className="btnBanner bg-white text-black "
+            onClick={openVideo}
+          >
             <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7 " />
             play
           </button>
