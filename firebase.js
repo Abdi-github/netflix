@@ -16,11 +16,8 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  // apiKey: "AIzaSyBc5QT31zit6y7-1bS8EwQ4w2G-fSUvQSk",
   apiKey: FB_API_KEY,
-  // authDomain: "netflix-94589.firebaseapp.com",
   authDomain: FB_AUTHDOMAIN,
-  // projectId: "netflix-94589",
   projectId: FB_PROJECTID,
   storageBucket: FB_STORAGE_BUCKET,
   messagingSenderId: FB_MESSAGING_SENDERID,
@@ -28,8 +25,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
 
