@@ -1,13 +1,10 @@
 import Link from "next/link";
-import { useRef } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContextProvider";
 import { validEmail } from "../helpers/global-constants";
 
 const Sign = () => {
-  const inputRef = useRef(null);
-
   const {
     register,
     handleSubmit,
@@ -42,12 +39,11 @@ const Sign = () => {
           (firebaseErr == "auth/user-not-found" ? (
             <div className="bg-[#e87c03] mb-3 rounded px-2 py-2 text-sm">
               <p>
-                Sorry, we can't find an account with this email address. Please
-                try again or
+                Sorry, we can&apos;t find an account with this email address.
+                Please try again or
                 <span className="underline cursor-pointer">
                   <Link href="/signup">create a new account</Link>
                 </span>
-                .
               </p>
             </div>
           ) : firebaseErr == "auth/wrong-password" ? (
