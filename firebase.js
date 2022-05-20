@@ -2,18 +2,29 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import {
+  FB_API_ID,
+  FB_API_KEY,
+  FB_AUTHDOMAIN,
+  FB_MESSAGING_SENDERID,
+  FB_PROJECTID,
+  FB_STORAGE_BUCKET,
+} from "./helpers/global-constants";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBc5QT31zit6y7-1bS8EwQ4w2G-fSUvQSk",
-  authDomain: "netflix-94589.firebaseapp.com",
-  projectId: "netflix-94589",
-  storageBucket: "netflix-94589.appspot.com",
-  messagingSenderId: "583437521011",
-  appId: "1:583437521011:web:f540c6cf4d6ee248061a06",
+  // apiKey: "AIzaSyBc5QT31zit6y7-1bS8EwQ4w2G-fSUvQSk",
+  apiKey: FB_API_KEY,
+  // authDomain: "netflix-94589.firebaseapp.com",
+  authDomain: FB_AUTHDOMAIN,
+  // projectId: "netflix-94589",
+  projectId: FB_PROJECTID,
+  storageBucket: FB_STORAGE_BUCKET,
+  messagingSenderId: FB_MESSAGING_SENDERID,
+  appId: FB_API_ID,
 };
 
 // Initialize Firebase

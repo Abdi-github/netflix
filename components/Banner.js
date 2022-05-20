@@ -75,7 +75,7 @@ const Banner = ({ videos }) => {
             <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7 " />
             play
           </button>
-          <button className="btnBanner bg-[gray]/70">
+          <button className="btnBanner bg-[gray]/70" onClick={openVideo}>
             more info
             <HiInformationCircle />
           </button>

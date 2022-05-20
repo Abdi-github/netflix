@@ -8,7 +8,17 @@ import "../styles/globals.css";
 const nonProtectedRoute = ["/signin", "/signup"];
 
 function MyApp({ Component, pageProps }) {
+  // const { modalMode } = state;
+  // useEffect(() => {
+  //   if (modalMode) {
+  //     document.body.style.overflow = "hidden";
+  //     return () => (document.body.style.overflow = "unset");
+  //   }
+  // }, []);
+
+  // Route Protection
   const router = useRouter();
+
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);

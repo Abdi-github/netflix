@@ -16,7 +16,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [firebaseErr, setFirebaseErr] = useState(null);
   const router = useRouter();
   //   console.log(user);
 
@@ -45,8 +45,10 @@ export const AuthContextProvider = ({ children }) => {
         router.push("/");
       })
       .catch((err) => {
-        // console.log(error);
-        setError(err.code);
+        console.log("SIGNUP ERROR------------", err.code);
+
+        setFirebaseErr(err.code);
+        setLoading(false);
       });
   };
 
@@ -61,7 +63,7 @@ export const AuthContextProvider = ({ children }) => {
       .catch((err) => {
         // console.log("Sign in error__________", error.message);
         console.log("Sign in error code__________", err.code);
-        setError(err.code);
+        setFirebaseErr(err.code);
         setLoading(false);
       });
   };
@@ -72,7 +74,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, signup, signout, error }}>
+    <AuthContext.Provider
+      value={{ user, signin, signup, signout, firebaseErr }}
+    >
       {loading ? null : children}
     </AuthContext.Provider>
   );
