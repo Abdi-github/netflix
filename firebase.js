@@ -17,9 +17,9 @@ import {
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: FB_API_KEY,
-  authDomain: "netflix-94589.firebaseapp.com",
+  authDomain: FB_AUTHDOMAIN,
   projectId: FB_PROJECTID,
-  storageBucket: "netflix-94589.appspot.com",
+  storageBucket: FB_STORAGE_BUCKET,
   messagingSenderId: FB_MESSAGING_SENDERID,
   appId: FB_API_ID,
 };
