@@ -11,7 +11,7 @@ import { useAuth } from "../../context/AuthContextProvider";
 import { StoreContext } from "../../context/StoreContext";
 import app, { auth, db } from "../../firebase";
 import { getAllProducts } from "../../helpers/firestore_api";
-import useSubscription from "../../helpers/useSubscription";
+import useSubscription from "../../helpers/UseSubscription";
 // import useSubscription from "../../helpers/subscription";
 import payments, { loadCheckout } from "../../stripe";
 

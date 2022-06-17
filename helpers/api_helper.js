@@ -1,5 +1,5 @@
 import { API_BASE_URL, API_KEY } from "./global-constants";
-import useSubscription from "./useSubscription";
+import useSubscription from "./UseSubscription";
 
 export const getTrending = async () => {
   const res = await fetch(

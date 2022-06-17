@@ -16,7 +16,7 @@ import {
   getRomanceMovies,
   getTrending,
 } from "../helpers/api_helper";
-import useSubscription from "../helpers/useSubscription";
+import useSubscription from "../helpers/UseSubscription";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContextProvider";
 
