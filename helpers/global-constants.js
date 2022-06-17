@@ -12,3 +12,7 @@ export const FB_STORAGE_BUCKET =
 export const FB_MESSAGING_SENDERID =
   process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
 export const FB_API_ID = process.env.NEXT_PUBLIC_FIREBASE_API_ID;
+
+export const BASIC_PRICE_ID = process.env.NEXT_PUBLIC_BASIC_PRICE_ID;
+export const STANDARD_PRICE_ID = process.env.NEXT_PUBLIC_STANDARD_PRICE_ID;
+export const PREMIUM_PRICE_ID = process.env.NEXT_PUBLIC_PREMIUM_PRICE_ID;

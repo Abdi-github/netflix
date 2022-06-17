@@ -7,7 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
-import { async } from "@firebase/util";
+import useSubscription from "../helpers/useSubscription";
+// import useSubscription from "../helpers/subscription";
 
 const AuthContext = createContext({});
 
@@ -18,9 +19,14 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [firebaseErr, setFirebaseErr] = useState(null);
   const router = useRouter();
+  const [subscription, setSubscription] = useState(null);
+
+  const subs = useSubscription();
   //   console.log(user);
+  console.log("subs :>> ", subs);
 
   useEffect(() => {
+    setSubscription(subs);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser({
@@ -41,8 +47,8 @@ export const AuthContextProvider = ({ children }) => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userInfo) => {
         setUser(userInfo.user);
+        router.push("/signup/plans");
         setLoading(false);
-        router.push("/");
       })
       .catch((err) => {
         console.log("SIGNUP ERROR------------", err.code);
@@ -57,8 +63,15 @@ export const AuthContextProvider = ({ children }) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userInfo) => {
         setUser(userInfo.user);
+        setSubscription(subs);
+        // console.log("subs22 :>> ", subs);
+        if (subscription.status !== "active") {
+          router.push("/");
+        } else {
+          router.push("/signup/plans");
+        }
+
         setLoading(false);
-        router.push("/");
       })
       .catch((err) => {
         // console.log("Sign in error__________", error.message);

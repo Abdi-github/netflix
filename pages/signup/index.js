@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Sign from "../components/Sign";
+import Sign from "../../components/Sign";
 
 const SignUpPage = () => {
   const [viewWidth, setViewWidth] = useState(
@@ -10,7 +10,7 @@ const SignUpPage = () => {
   useEffect(() => {
     const handleWindowResize = () => setViewWidth(window.innerWidth);
     window.addEventListener("resize", handleWindowResize);
-    console.log(viewWidth);
+    // console.log(viewWidth);
 
     // Return a function from the effect that removes the event listener
     return () => window.removeEventListener("resize", handleWindowResize);

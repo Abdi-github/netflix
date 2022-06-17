@@ -1,4 +1,5 @@
 import { API_BASE_URL, API_KEY } from "./global-constants";
+import useSubscription from "./useSubscription";
 
 export const getTrending = async () => {
   const res = await fetch(
@@ -115,6 +116,131 @@ export const getDocumentaries = async () => {
   });
   return data;
 };
+export const getNewMovies = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/trending/movie/week?api_key=${API_KEY}`
+  );
+
+  const newMovies = await res.json();
+
+  const data = newMovies.results.map((result) => {
+    return {
+      ...result,
+      type: "movie",
+    };
+  });
+  return data;
+};
+export const getPopularMovies = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+  );
+
+  const popular = await res.json();
+
+  const data = popular.results.map((result) => {
+    return {
+      ...result,
+      type: "movie",
+    };
+  });
+  return data;
+};
+export const getKidsPopularMovies = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/discover/movie?api_key=${API_KEY}&certification_country=US&certification.lte=G&with_genres=16&include_adult=false&sort_by=popularity.desc`
+  );
+
+  const kids = await res.json();
+
+  const data = kids.results.map((result) => {
+    return {
+      ...result,
+      type: "movie",
+    };
+  });
+  return data;
+};
+export const getKidsRecentMovies = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/discover/movie?api_key=${API_KEY}&certification_country=US&certification.lte=G&with_genres=16&include_adult=false&sort_by=release_date.desc`
+  );
+
+  const kids = await res.json();
+
+  const data = kids.results.map((result) => {
+    return {
+      ...result,
+      type: "movie",
+    };
+  });
+  return data;
+};
+export const getKidsHighlyRatedMovies = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/discover/movie?api_key=${API_KEY}&certification_country=US&certification.lte=G&with_genres=16&include_adult=false&sort_by=vote_average.desc`
+  );
+
+  const kids = await res.json();
+
+  const data = kids.results.map((result) => {
+    return {
+      ...result,
+      type: "movie",
+    };
+  });
+  return data;
+};
+
+// /discover/movie?certification_country=US&certification.lte=G&with_genres=16&include_adult=false&sort_by=popularity.desc
+
+export const getPopularTvShows = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=1`
+  );
+
+  const tvShows = await res.json();
+
+  const data = tvShows.results.map((result) => {
+    return {
+      ...result,
+      type: "tv-show",
+    };
+  });
+  return data;
+};
+
+export const getTopRatedTvShows = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/tv/top_rated?api_key=${API_KEY}&language=en-US&page=1`
+  );
+
+  const tvShows = await res.json();
+
+  const data = tvShows.results.map((result) => {
+    return {
+      ...result,
+      type: "tv-show",
+    };
+  });
+  return data;
+};
+
+export const getNewTvShows = async () => {
+  const res = await fetch(
+    `${API_BASE_URL}/trending/tv/week?api_key=${API_KEY}`
+  );
+
+  const newTvs = await res.json();
+
+  const data = newTvs.results.map((result) => {
+    return {
+      ...result,
+      type: "tv-show",
+    };
+  });
+  return data;
+};
 
 export const getMovieDetail = async (movie_id) => {
   const res = await fetch(
@@ -124,6 +250,15 @@ export const getMovieDetail = async (movie_id) => {
   const movieTrailler = await res.json();
   return movieTrailler;
 };
+export const getTvShowDetail = async (tv_id) => {
+  const res = await fetch(
+    `${API_BASE_URL}/tv/${tv_id}?api_key=${API_KEY}&language=en-US`
+  );
+
+  const showTrailler = await res.json();
+  return showTrailler;
+};
+
 export const getMovieTrailler = async (movie_id) => {
   const res = await fetch(
     `${API_BASE_URL}/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
@@ -132,14 +267,15 @@ export const getMovieTrailler = async (movie_id) => {
   const movieTrailler = await res.json();
   return movieTrailler;
 };
-export const getTvShowTrailler = async () => {
+export const getTvShowTrailler = async (tv_id) => {
   const res = await fetch(
-    `${API_BASE_URL}/tv/{tv_id}/videos?api_key=${API_KEY}&language=en-US`
+    `${API_BASE_URL}/tv/${tv_id}/videos?api_key=${API_KEY}&language=en-US`
   );
 
   const TvShowTrailler = await res.json();
   return TvShowTrailler;
 };
+
 export const getTvSeasonsTrailler = async () => {
   const res = await fetch(
     `${API_BASE_URL}/tv/{tv_id}/season/{season_number}/videos?api_key=${API_KEY}&language=en-US`
@@ -156,16 +292,9 @@ export const getEpisodesTrailler = async () => {
   const TvEpisodesTrailler = await res.json();
   return TvEpisodesTrailler;
 };
-// async function fetchMovie(id) {
-//   const response = await fetch(
-//     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
-//   );
-//   const movie = await response.json();
-//   return movie;
-// }
 
-// fetchMovie(movieId).then((movie) => {
-//   movie.genres.forEach((genre) => {
-//     console.log("genre id: " + genre.id + ", genre name: " + genre.name);
-//   });
-// });
+// const subs = useSubscription();
+// export const getUserSubscription = () => {
+//   if (subs === null) return null;
+//   return subs;
+// };

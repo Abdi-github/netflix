@@ -24,7 +24,7 @@ const VideoLists = ({ videos, category }) => {
       <h2 className="text-[#e5e5e5] font-semibold py-2 text-sm md:text-2xl hover:text-gray-50 transition duration-300  ">
         {category}
       </h2>
-      <div className="group relative">
+      <div className="group relative ">
         {isScrolled && (
           <HiChevronLeft
             className="scrollIcon left-0.5"
@@ -43,9 +43,13 @@ const VideoLists = ({ videos, category }) => {
             >
               <VideoCard
                 video={video}
-                imgSrc={`${IMAGE_BASE_URL}/w500${
-                  video?.backdrop_path || video?.poster_path
-                }`}
+                imgSrc={
+                  video?.backdrop_path || video?.poster_path !== null
+                    ? `${IMAGE_BASE_URL}/w500${
+                        video?.backdrop_path || video?.poster_path
+                      }`
+                    : `/images/others/default-movie.png`
+                }
                 imgAlt={video?.original_title}
               />
             </div>

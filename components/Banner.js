@@ -30,12 +30,15 @@ const Banner = ({ videos }) => {
       //   video: video,
       // },
       payload: {
-        video: { id: video.id, title: video.original_title, type: "movie" },
+        video: { ...video, type: "movie", myListAdded: false },
       },
     });
 
     localStorage.setItem("modalMode", true);
-    localStorage.setItem("video", JSON.stringify(video));
+    localStorage.setItem(
+      "video",
+      JSON.stringify({ ...video, myListAdded: false })
+    );
   };
 
   // const closeModal = () => {
@@ -58,6 +61,7 @@ const Banner = ({ videos }) => {
           alt={video?.original_title}
           layout="fill"
           objectFit="cover"
+          priority
         />
       </div>
       <div className="py-24 md:self-center px-2 md:px-4 lg:px-7 space-y-2  md:space-y-3">

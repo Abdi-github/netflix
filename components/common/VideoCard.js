@@ -17,29 +17,35 @@ const VideoCard = ({ imgSrc, imgAlt, video }) => {
     });
     dispatch({
       type: "SET_VIDEO",
+      // payload: {
+      //   video: video,
+      // },
       payload: {
-        video: video,
-      },
-      payload: {
-        video: { id: video.id, title: video.original_title, type: video.type },
+        video: { ...video, type: video.type, myListAdded: false },
       },
     });
 
     localStorage.setItem("modalMode", true);
-    localStorage.setItem("video", JSON.stringify(video));
+    localStorage.setItem(
+      "video",
+      JSON.stringify({ ...video, myListAdded: false })
+    );
   };
   return (
-    <div
-      className="relative h-[120px] min-w-[180px] cursor-pointer"
-      onClick={openVideo}
-    >
-      <Image
-        src={imgSrc}
-        layout="fill"
-        alt={imgAlt}
-        className="object-cover rounded-sm md:rounded"
-      />
-    </div>
+    <>
+      <div
+        className="relative h-[120px] min-w-[180px] cursor-pointer peer"
+        onClick={openVideo}
+      >
+        <Image
+          src={imgSrc}
+          layout="fill"
+          alt={imgAlt}
+          className="object-cover rounded-sm md:rounded "
+        />
+      </div>
+      {/* <div className="hidden py-16 bg-black/50 peer-hover:block"></div> */}
+    </>
   );
 };
 

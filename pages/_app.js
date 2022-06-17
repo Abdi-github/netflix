@@ -1,21 +1,14 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { AuthContextProvider } from "../context/AuthContextProvider";
+import { useEffect, useState, useContext } from "react";
+import { AuthContextProvider, useAuth } from "../context/AuthContextProvider";
 import ProtectedRoute from "../helpers/ProtectedRoute";
-import { StoreProvider } from "../context/StoreContext";
+import { StoreContext, StoreProvider } from "../context/StoreContext";
 import "../styles/globals.css";
+import { collection, getDocs, query } from "firebase/firestore";
 
-const nonProtectedRoute = ["/signin", "/signup"];
+const nonProtectedRoute = ["/signin", "/signup", "/signup/plans"];
 
 function MyApp({ Component, pageProps }) {
-  // const { modalMode } = state;
-  // useEffect(() => {
-  //   if (modalMode) {
-  //     document.body.style.overflow = "hidden";
-  //     return () => (document.body.style.overflow = "unset");
-  //   }
-  // }, []);
-
   // Route Protection
   const router = useRouter();
 

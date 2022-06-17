@@ -1,8 +1,11 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContextProvider";
+import { auth } from "../firebase";
 import { validEmail } from "../helpers/global-constants";
+import app from "../firebase";
 
 const Sign = () => {
   const {
@@ -22,11 +25,19 @@ const Sign = () => {
       await signin(data.email, data.password);
     } else if (router.route == "/signup") {
       await signup(data.email, data.password);
+
+      // const userCredentials = await createUserWithEmailAndPassword(
+      //   auth,
+      //   data.email,
+      //   data.password
+      // );
+
+      // console.log({ ...userCredentials.user });
     }
   };
 
-  console.log("EEEEEEEEEEEEEEEEE", firebaseErr);
-  console.log(touchedFields);
+  //   console.log("EEEEEEEEEEEEEEEEE", firebaseErr);
+  //   console.log(touchedFields);
 
   return (
     <div className="max-w-[400px] mx-auto pt-12 px-10 py-5 md:bg-black/75 ]  ">
