@@ -8,6 +8,9 @@ const nextConfig = {
   images: {
     domains: ["image.tmdb.org", "rb.gy"],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = withTM(nextConfig);
