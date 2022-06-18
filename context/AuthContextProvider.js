@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
-import useSubscription from "../helpers/UseSubscription";
+import useSubscription from "../helpers/useSubscription";
 // import useSubscription from "../helpers/subscription";
 
 const AuthContext = createContext({});

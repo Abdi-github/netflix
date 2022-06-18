@@ -10,7 +10,7 @@ import {
   PREMIUM_PRICE_ID,
   STANDARD_PRICE_ID,
 } from "../helpers/global-constants";
-import useSubscription from "../helpers/UseSubscription";
+import useSubscription from "../helpers/useSubscription";
 import { goToBillingPortal } from "../stripe";
 
 const account = () => {
