@@ -13,6 +13,7 @@ const ProtectedRoute = ({ children }) => {
   useSubscription();
 
   const { subscription } = state;
+  console.log("subscription================", subscription);
 
   useEffect(() => {
     if (!user) {
