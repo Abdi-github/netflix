@@ -58,14 +58,16 @@ const plans = () => {
   // console.log("products", products);
 
   const { signout, user } = useAuth();
-  const subs = useSubscription();
+  const { state } = useContext(StoreContext);
+  useSubscription();
+  const { subscription } = state;
   const router = useRouter();
 
   const [isSubscribeBtnClicked, setIsSubscribeBtnClicked] = useState(false);
 
   const subscribeToPlan = () => {
     if (!user) return;
-    if (subs) {
+    if (subscription) {
       router.push("/account");
       return;
     }
@@ -153,7 +155,6 @@ const plans = () => {
         </div>
         <div className="py-72 w-full"></div>
       </div>
-      <PlanCard />
     </>
   );
 };

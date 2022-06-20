@@ -1,24 +1,36 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useAuth } from "../context/AuthContextProvider";
+import { StoreContext } from "../context/StoreContext";
 import useSubscription from "./useSubscription";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   const router = useRouter();
+  const { state } = useContext(StoreContext);
+  const [subsStatus, setSubsStatus] = useState("");
 
-  const subs = useSubscription();
+  useSubscription();
+
+  const { subscription } = state;
 
   useEffect(() => {
     if (!user) {
       router.push("/signin");
     }
-    if (user && subs?.status !== "active") {
-      router.push("/signup/plans");
-    }
-  }, [user, router, subs?.status]);
+    console.log("subscription :>> ", subscription);
 
-  return <>{subs?.status === "active" ? children : null}</>;
+    if (subscription === null || subscription?.status !== "active") {
+      setSubsStatus("inactive");
+      router.replace("/signup/plans");
+    } else {
+      setSubsStatus(subscription.status);
+    }
+
+    console.log("subsStatus :>> ", subsStatus);
+  }, [user, router, subscription, subsStatus]);
+
+  return <>{subsStatus === "active" ? children : null}</>;
 };
 
 export default ProtectedRoute;

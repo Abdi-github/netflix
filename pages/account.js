@@ -1,10 +1,12 @@
 import moment from "moment";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState, useContext } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import Spinner from "../components/Spinner";
 import { useAuth } from "../context/AuthContextProvider";
+import { StoreContext } from "../context/StoreContext";
 import {
   BASIC_PRICE_ID,
   PREMIUM_PRICE_ID,
@@ -18,13 +20,15 @@ const account = () => {
     typeof window !== "undefined" && window.innerWidth
   );
 
-  const [subscription, setSubscription] = useState(null);
+  const [subs, setSubs] = useState(null);
   const [timeStart, setTimeStart] = useState("");
   const [timeEnd, setTimeEnd] = useState("");
   const [priceId, setPriceId] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
-  const subs = useSubscription();
+  useSubscription();
+  const { state } = useContext(StoreContext);
+  const { subscription } = state;
 
   useEffect(() => {
     const handleWindowResize = () => setViewWidth(window.innerWidth);
@@ -36,8 +40,8 @@ const account = () => {
   }, [viewWidth]);
 
   useEffect(() => {
-    setSubscription(subs);
-    console.log("SUBS ACCT", subscription);
+    setSubs(subscription);
+    console.log("SUBS ACCT", subs);
     const startTime = new Date(
       subscription?.created.seconds * 1000 +
         subscription?.created.nanoseconds / 1000000
@@ -91,12 +95,15 @@ const account = () => {
       {/* <pre>{JSON.stringify(plans, null, 4)}</pre> */}
       <div className="flex items-center justify-between px-3 py-3 border-b border-b-gray-600">
         <div className="-ml-4">
-          <Image
-            src="/images/logo/logo.svg"
-            width={viewWidth < smallScreenSize ? `120` : `180`}
-            height={viewWidth < smallScreenSize ? `35` : `60`}
-            alt="netflix bg"
-          />
+          <Link href="/">
+            <Image
+              src="/images/logo/logo.svg"
+              width={viewWidth < smallScreenSize ? `120` : `180`}
+              height={viewWidth < smallScreenSize ? `35` : `60`}
+              alt="netflix bg"
+              className="cursor-pointer"
+            />
+          </Link>
         </div>
         <div>
           <Image
@@ -104,7 +111,7 @@ const account = () => {
             width={25}
             height={25}
             alt="account-logo"
-            className="rounded"
+            className="rounded cursor-pointer"
             onClick={signout}
           />
         </div>
@@ -130,7 +137,7 @@ const account = () => {
           <div className="flex mt-4 text-sm justify-between  ">
             {viewWidth > smallScreenSize && membershipDiv}
             <div className=" space-y-4">
-              <p className="font-bold">{user.email}</p>
+              <p className="font-bold">{user?.email}</p>
               <p className="">Password: ********* </p>
               <p className="pt-6 ">
                 Your subscription will end on{" "}

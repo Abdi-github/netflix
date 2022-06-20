@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect, useState, useContext } from "react";
-import { AuthContextProvider, useAuth } from "../context/AuthContextProvider";
+import { useEffect, useState } from "react";
+import { AuthContextProvider } from "../context/AuthContextProvider";
 import ProtectedRoute from "../helpers/ProtectedRoute";
-import { StoreContext, StoreProvider } from "../context/StoreContext";
+import { StoreProvider } from "../context/StoreContext";
 import "../styles/globals.css";
-import { collection, getDocs, query } from "firebase/firestore";
 
 const nonProtectedRoute = ["/signin", "/signup", "/signup/plans"];
 
@@ -25,8 +24,8 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-      <AuthContextProvider>
-        <StoreProvider>
+      <StoreProvider>
+        <AuthContextProvider>
           {nonProtectedRoute.includes(router.pathname) ? (
             <Component {...pageProps} />
           ) : (
@@ -34,8 +33,8 @@ function MyApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </ProtectedRoute>
           )}
-        </StoreProvider>
-      </AuthContextProvider>
+        </AuthContextProvider>
+      </StoreProvider>
     );
   }
 }

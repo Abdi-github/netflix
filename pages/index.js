@@ -29,28 +29,22 @@ const Home = ({
   horrors,
   documentaries,
 }) => {
-  const { state } = useContext(StoreContext);
-
   const router = useRouter();
 
+  const { state } = useContext(StoreContext);
   const { myList } = state;
   // console.log("MY LIST INDEX", myList);
   const [myListVideos, setMyListVideos] = useState([]);
-  const subs = useSubscription();
+  useSubscription();
+
   const { user } = useAuth();
 
   // useEffect(() => {
 
   // }, [router, user, subs]);
   useEffect(() => {
-    // if (!user) {
-    //   router.push("/signin");
-    // }
-    // if (subs?.status !== "active") {
-    //   router.push("/signup/plans");
-    // }
     setMyListVideos(myList);
-  }, [myList, user, router, subs]);
+  }, [myList]);
 
   return (
     <>

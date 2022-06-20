@@ -1,42 +1,60 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import { collection, getDocs, query } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { StoreContext } from "../context/StoreContext";
 
 const useSubscription = () => {
   const [subscription, setSubscription] = useState(null);
-  const [subsStatus, setSubsStatus] = useState(null);
+  const { dispatch } = useContext(StoreContext);
 
   const userId = auth?.currentUser?.uid;
-
-  const getSubscriptionDetail = async () => {
-    // console.log(userId);
-
-    const querySnapshot = await getDocs(
-      query(collection(db, `customers/${userId}/subscriptions`))
-    );
-    querySnapshot.forEach((queryDocumentSnapshot) => {
-      console.log(queryDocumentSnapshot.id, queryDocumentSnapshot.data());
-      // setSubscription(queryDocumentSnapshot.data());
-      const subs = queryDocumentSnapshot.data();
-      setSubscription(subs);
-      setSubsStatus(subs?.status);
-    });
-    // console.log(auth.currentUser.uid);
-  };
 
   useEffect(() => {
     if (!userId) return;
 
-    getSubscriptionDetail();
+    (async function () {
+      try {
+        const querySnapshot = await getDocs(
+          query(collection(db, `customers/${userId}/subscriptions`))
+        );
+        let subs = null;
 
-    // getSubscriptionDetail(userId);
-  }, [userId, subsStatus]);
-  const subscriptionData = {
-    status: subsStatus,
-    data: subscription,
-  };
-  return subscriptionData;
+        querySnapshot.forEach((queryDocumentSnapshot) => {
+          console.log(queryDocumentSnapshot.id, queryDocumentSnapshot.data());
+          subs = queryDocumentSnapshot.data();
+
+          // setSubscription(queryDocumentSnapshot.data());
+        });
+        console.log("SSSSSSSSSSSSSS", subs);
+        if (subs === null) {
+          localStorage.setItem("subscription", null);
+          dispatch({
+            type: "SET_SUBSCRIPTION",
+            payload: {
+              subscription: null,
+            },
+          });
+        } else {
+          localStorage.setItem("subscription", JSON.stringify(subs));
+
+          dispatch({
+            type: "SET_SUBSCRIPTION",
+            payload: {
+              subscription: subs,
+            },
+          });
+        }
+
+        // setSubscription(subs);
+        // setSubsStatus(subs?.status);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, [userId, subscription?.status]);
+
+  return subscription;
 };
 
 export default useSubscription;

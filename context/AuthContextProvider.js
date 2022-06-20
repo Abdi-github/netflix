@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase";
 import { useRouter } from "next/router";
 import useSubscription from "../helpers/useSubscription";
+import { StoreContext } from "./StoreContext";
 // import useSubscription from "../helpers/subscription";
 
 const AuthContext = createContext({});
@@ -19,20 +20,29 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [firebaseErr, setFirebaseErr] = useState(null);
   const router = useRouter();
-  const [subscription, setSubscription] = useState(null);
+  const [subs, setSubs] = useState(null);
 
-  const subs = useSubscription();
+  useSubscription();
   //   console.log(user);
-  console.log("subs :>> ", subs);
+  const { state, dispatch } = useContext(StoreContext);
+  const { subscription } = state;
 
   useEffect(() => {
-    setSubscription(subs);
+    setSubs(subscription);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser({
           id: user.uid,
           email: user.email,
         });
+
+        // localStorage.setItem("user", JSON.stringify(user));
+        // dispatch({
+        //   type: "SET_USER",
+        //   payload: {
+        //     user: user,
+        //   },
+        // });
       } else {
         setUser(null);
       }
@@ -63,13 +73,9 @@ export const AuthContextProvider = ({ children }) => {
     await signInWithEmailAndPassword(auth, email, password)
       .then((userInfo) => {
         setUser(userInfo.user);
-        setSubscription(subs);
-        // console.log("subs22 :>> ", subs);
-        if (subscription.status !== "active") {
-          router.push("/");
-        } else {
-          router.push("/signup/plans");
-        }
+        setSubs(subscription);
+
+        router.push("/");
 
         setLoading(false);
       })

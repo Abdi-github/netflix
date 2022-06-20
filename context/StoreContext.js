@@ -1,7 +1,5 @@
 import { createContext, useReducer } from "react";
 
-export const StoreContext = createContext();
-
 const initialState = {
   modalMode:
     typeof window !== "undefined" &&
@@ -77,6 +75,7 @@ function reducer(state, action) {
       return state;
   }
 }
+export const StoreContext = createContext(initialState);
 
 export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
