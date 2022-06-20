@@ -40,14 +40,14 @@ const NavBar = () => {
       <div className="flex justify-between">
         <div className="flex items-center space-x-8 ">
           <div>
-            <Link href="/">
-              <Image
-                src="/images/logo/logo.png"
-                alt="logo"
-                width={100}
-                height={60}
-              />
-            </Link>
+            {/* <Link href="/"> */}
+            <Image
+              src="/images/logo/logo.png"
+              alt="logo"
+              width={100}
+              height={60}
+            />
+            {/* </Link> */}
           </div>
           <DropdownMenu />
 
