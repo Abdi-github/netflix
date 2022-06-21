@@ -21,17 +21,18 @@ const ProtectedRoute = ({ children }) => {
     }
     console.log("subscription :>> ", subscription);
 
-    if (subscription === null || subscription?.status !== "active") {
-      setSubsStatus("inactive");
-      router.replace("/signup/plans");
-    } else {
-      setSubsStatus(subscription.status);
-    }
+    // if (subscription === null || subscription?.status !== "active") {
+    //   setSubsStatus("inactive");
+    //   router.replace("/signup/plans");
+    // } else {
+    //   setSubsStatus(subscription.status);
+    // }
 
-    console.log("subsStatus :>> ", subsStatus);
+    // console.log("subsStatus :>> ", subsStatus);
   }, [user, router, subscription, subsStatus]);
 
-  return <>{subsStatus === "active" ? children : null}</>;
+  // return <>{subsStatus === "active" ? children : null}</>;
+  return <>{user ? children : null}</>;
 };
 
 export default ProtectedRoute;
