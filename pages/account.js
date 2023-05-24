@@ -1,29 +1,28 @@
-import moment from "moment";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState, useContext } from "react";
-import { HiOutlineInformationCircle } from "react-icons/hi";
-import Spinner from "../components/Spinner";
-import { useAuth } from "../context/AuthContextProvider";
-import { StoreContext } from "../context/StoreContext";
+import moment from 'moment';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState, useContext } from 'react';
+import { HiOutlineInformationCircle } from 'react-icons/hi';
+import Spinner from '../components/Spinner';
+import { useAuth } from '../context/AuthContextProvider';
+import { StoreContext } from '../context/StoreContext';
 import {
   BASIC_PRICE_ID,
   PREMIUM_PRICE_ID,
   STANDARD_PRICE_ID,
-} from "../helpers/global-constants";
-import useSubscription from "../helpers/useSubscription";
-import { goToBillingPortal } from "../stripe";
+} from '../helpers/global-constants';
+import useSubscription from '../helpers/useSubscription';
 
 const account = () => {
   const [viewWidth, setViewWidth] = useState(
-    typeof window !== "undefined" && window.innerWidth
+    typeof window !== 'undefined' && window.innerWidth
   );
 
   const [subs, setSubs] = useState(null);
-  const [timeStart, setTimeStart] = useState("");
-  const [timeEnd, setTimeEnd] = useState("");
-  const [priceId, setPriceId] = useState("");
+  const [timeStart, setTimeStart] = useState('');
+  const [timeEnd, setTimeEnd] = useState('');
+  const [priceId, setPriceId] = useState('');
   const [isClicked, setIsClicked] = useState(false);
 
   useSubscription();
@@ -32,16 +31,16 @@ const account = () => {
 
   useEffect(() => {
     const handleWindowResize = () => setViewWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
+    window.addEventListener('resize', handleWindowResize);
 
     // console.log(viewWidth);
     // Return a function from the effect that removes the event listener
-    return () => window.removeEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
   }, [viewWidth]);
 
   useEffect(() => {
     setSubs(subscription);
-    console.log("SUBS ACCT", subs);
+    console.log('SUBS ACCT', subs);
     const startTime = new Date(
       subscription?.created.seconds * 1000 +
         subscription?.created.nanoseconds / 1000000
@@ -60,7 +59,6 @@ const account = () => {
   const smallScreenSize = 768;
 
   const changeSubscription = () => {
-    goToBillingPortal();
     setIsClicked(true);
   };
 
@@ -70,7 +68,7 @@ const account = () => {
       <div onClick={changeSubscription}>
         <button
           className={`bg-gray-700 px-2 py-3 ${
-            isClicked && "w-44 flex justify-center"
+            isClicked && 'w-44 flex justify-center'
           }`}
           onClick={changeSubscription}
           disabled={isClicked ? true : false}
@@ -78,7 +76,7 @@ const account = () => {
           {isClicked ? (
             <Spinner color="text-gray-200" />
           ) : (
-            "Cancel or Update Membership"
+            'Cancel or Update Membership'
           )}
         </button>
       </div>
@@ -122,7 +120,7 @@ const account = () => {
           <div className="flex gap-x-2 items-center">
             <img src="https://rb.gy/4vfk4r" alt="" className="h-7 w-7" />
             <p className="text-sm">
-              Member since {moment(timeStart).format("MMMM YYYY")}
+              Member since {moment(timeStart).format('MMMM YYYY')}
             </p>
           </div>
         </div>
@@ -140,8 +138,8 @@ const account = () => {
               <p className="font-bold">{user?.email}</p>
               <p className="">Password: ********* </p>
               <p className="pt-6 ">
-                Your subscription will end on{" "}
-                {moment(timeEnd).format("MMMM DD  YYYY")}
+                Your subscription will end on{' '}
+                {moment(timeEnd).format('MMMM DD  YYYY')}
               </p>
             </div>
             <div className="text-blue-500 text-xs space-y-4">
@@ -154,12 +152,12 @@ const account = () => {
           <h3 className="text-gray-400 text-lg ">Plan Details</h3>
           <p className="font-bold">
             {priceId === BASIC_PRICE_ID
-              ? "Basic"
+              ? 'Basic'
               : priceId === STANDARD_PRICE_ID
-              ? "Standard"
+              ? 'Standard'
               : priceId === PREMIUM_PRICE_ID
-              ? "Premium"
-              : ""}
+              ? 'Premium'
+              : ''}
           </p>
         </div>
       </div>

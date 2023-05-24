@@ -1,17 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { HiSearch, HiBell, HiChevronDown, HiPencil } from "react-icons/hi";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { HiSearch, HiBell } from 'react-icons/hi';
 
-import { useState, useEffect, Fragment } from "react";
-import { useAuth } from "../../context/AuthContextProvider";
-import DropdownMenu from "../DropdownMenu";
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContextProvider';
+import DropdownMenu from '../DropdownMenu';
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [url, setUrl] = useState("/");
+  const [url, setUrl] = useState('/');
   const router = useRouter();
-  console.log("router :>> ", router);
+  console.log('router :>> ', router);
 
   useEffect(() => {
     setUrl(router.route);
@@ -23,9 +23,9 @@ const NavBar = () => {
         setIsScrolled(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -34,7 +34,7 @@ const NavBar = () => {
   return (
     <nav
       className={`px-5 z-50	fixed top-0 left-0 right-0 ${
-        isScrolled && "bg-[#141414]"
+        isScrolled && 'bg-[#141414]'
       }`}
     >
       <div className="flex justify-between">
@@ -53,29 +53,29 @@ const NavBar = () => {
 
           <div className="hidden md:inline-block space-x-5">
             <Link href="/">
-              <a className={url === "/" ? "navLink-active" : "navLink"}>Home</a>
+              <a className={url === '/' ? 'navLink-active' : 'navLink'}>Home</a>
             </Link>
             <Link href="/movies">
-              <a className={url === "/movies" ? "navLink-active" : "navLink"}>
+              <a className={url === '/movies' ? 'navLink-active' : 'navLink'}>
                 Movies
               </a>
             </Link>
             <Link href="tv-shows">
-              <a className={url === "/tv-shows" ? "navLink-active" : "navLink"}>
+              <a className={url === '/tv-shows' ? 'navLink-active' : 'navLink'}>
                 TV Shows
               </a>
             </Link>
             <Link href="/new-popular">
               <a
                 className={
-                  url === "/new-popular" ? "navLink-active" : "navLink"
+                  url === '/new-popular' ? 'navLink-active' : 'navLink'
                 }
               >
                 New & popular
               </a>
             </Link>
             <Link href="/mylist">
-              <a className={url === "/mylist" ? "navLink-active" : "navLink"}>
+              <a className={url === '/mylist' ? 'navLink-active' : 'navLink'}>
                 My List
               </a>
             </Link>
